@@ -11,3 +11,6 @@ test:
 
 check:
 	bundle exec rake
+
+
+.PHONY: test

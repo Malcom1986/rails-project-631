@@ -2,7 +2,7 @@
 
 module HexletCode
   class Tag
-    @paired_tags = %w[div span p label form]
+    @paired_tags = %w[div span p label form textarea]
 
     def self.build(tag, attributes = {})
       attr_string = attributes.to_a.map do |(key, value)|

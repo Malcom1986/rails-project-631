@@ -2,36 +2,48 @@
 
 require 'test_helper'
 
-describe 'single tag' do
-  it 'should works without attributes' do
-    assert { HexletCode::Tag.build 'br' == '<br>' }
-    assert { HexletCode::Tag.build 'hr' == '<hr>' }
+class PostTest < Minitest::Test
+  User = Struct.new(:name, :job, :gender, keyword_init: true)
+
+  def setup
+    @user = User.new name: 'rob', job: 'hexlet', gender: 'm'
   end
 
-  it 'should works with attributes' do
-    actual1 = HexletCode::Tag.build('img', src: 'path/to/image')
-    expected1 = '<img src="path/to/image">'
-    assert { actual1 == expected1 }
-
-    actual2 = HexletCode::Tag.build('input', type: 'submit', value: 'Save')
-    expected2 = '<input type="submit" value="Save">'
-    assert { actual2 == expected2 }
-  end
-end
-
-describe 'paired tag' do
-  it 'should works without body and attributes' do
-    assert { HexletCode::Tag.build('div') == '<div></div>' }
-    assert { HexletCode::Tag.build 'span' == '<span></span>' }
+  def read_fixture(file_name)
+    filename = "#{file_name}.html"
+    fixture_path = File.join(__dir__, 'fixtures', filename)
+    File.read(fixture_path).strip
   end
 
-  it 'should works with attributes' do
-    actual1 = HexletCode::Tag.build('label') { 'Email' }
-    expected1 = '<label>Email</label>'
-    assert { actual1 == expected1 }
+  def test_form_builder_with_empty_fields
+    actual = HexletCode.form_for @user do |f|
+    end
+    expected = read_fixture('empty_form_wo_url')
+    assert { actual == expected }
+  end
 
-    actual2 = HexletCode::Tag.build('label', for: 'email') { 'Email' }
-    expected2 = '<label for="email">Email</label>'
-    assert { actual2 == expected2 }
+  def test_form_builder_with_empty_fields_w_url
+    actual = HexletCode.form_for @user, url: '/users' do |f|
+    end
+    expected = read_fixture('empty_form_w_url')
+    assert { actual == expected }
+  end
+
+  def test_form_builder_with_fields
+    actual = HexletCode.form_for @user do |f|
+      f.input :name
+      f.input :job, as: :text
+    end
+    expected = read_fixture('form_with_fields')
+    assert { actual == expected }
+  end
+
+  def test_form_builder_with_extra_attributes
+    actual = HexletCode.form_for @user, url: '#' do |f|
+      f.input :name, class: 'user-input'
+      f.input :job
+    end
+    expected = read_fixture('form_with_fields_attr')
+    assert { actual == expected }
   end
 end
