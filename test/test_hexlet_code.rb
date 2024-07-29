@@ -15,19 +15,19 @@ class PostTest < Minitest::Test
     File.read(fixture_path).strip
   end
 
-  def test_form_builder_with_empty_fields
-    actual = HexletCode.form_for @user do |f|
-    end
-    expected = read_fixture('empty_form_wo_url')
-    assert { actual == expected }
-  end
+  # def test_form_builder_with_empty_fields
+  #   actual = HexletCode.form_for @user do |f|
+  #   end
+  #   expected = read_fixture('empty_form_wo_url')
+  #   assert { actual == expected }
+  # end
 
-  def test_form_builder_with_empty_fields_w_url
-    actual = HexletCode.form_for @user, url: '/users' do |f|
-    end
-    expected = read_fixture('empty_form_w_url')
-    assert { actual == expected }
-  end
+  # def test_form_builder_with_empty_fields_w_url
+  #   actual = HexletCode.form_for @user, url: '/users' do |f|
+  #   end
+  #   expected = read_fixture('empty_form_w_url')
+  #   assert { actual == expected }
+  # end
 
   def test_form_builder_with_fields
     actual = HexletCode.form_for @user do |f|

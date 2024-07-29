@@ -17,12 +17,10 @@ module HexletCode
     def input(field, opts = {})
       value = @entity.public_send(field)
       type = opts[:as]
-      rejected_opts = opts.reject { |key, _| key == :as }
-
       @fields << if type.nil?
-                   TextType.new(field, value, rejected_opts)
+                   TextType.new(field, value, opts.except(:as))
                  elsif type == :text
-                   TextareaType.new(field, value, rejected_opts)
+                   TextareaType.new(field, value, opts.except(:as))
                  end
     end
 

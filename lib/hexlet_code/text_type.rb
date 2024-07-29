@@ -2,19 +2,19 @@
 
 module HexletCode
   class TextType
-    @@default_opts = {}
-
     def initialize(prop, value, opts = {})
+      @default_opts = {}
       @prop = prop
       @value = value
-      @opts = @@default_opts.merge(opts)
+      @opts = opts
     end
-    attr_reader(:tag, :prop, :value, :opts)
+    attr_reader(:prop, :value)
 
     def to_html
+      options = @default_opts.merge(@opts)
       params = { name: prop, type: 'text', value: }
       label = Tag.build('label', for: prop) { prop.capitalize }
-      input = Tag.build('input', params.merge(opts))
+      input = Tag.build('input', params.merge(options))
       "#{label}#{input}"
     end
   end

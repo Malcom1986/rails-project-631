@@ -2,18 +2,18 @@
 
 module HexletCode
   class TextareaType
-    @@default_opts = { cols: 20, rows: 40 }
-
     def initialize(prop, value, opts = {})
+      @default_opts = { cols: 20, rows: 40 }
       @prop = prop
       @value = value
-      @opts = @@default_opts.merge(opts)
+      @opts = opts
     end
-    attr_reader(:tag, :prop, :value, :opts)
+    attr_reader(:prop, :value)
 
     def to_html
+      options = @default_opts.merge(@opts)
       params = { name: prop }
-      Tag.build('textarea', params.merge(opts)) { value }
+      Tag.build('textarea', params.merge(options)) { value }
     end
   end
 end
