@@ -81,9 +81,7 @@ class PostTest < Minitest::Test
   def test_form_builder3
     user = User.new name: 'rob'
 
-    actual = HexletCode.form_for user, url: '/profile', method: :get, class: 'hexlet-form' do |f|
-      f.submit
-    end
+    actual = HexletCode.form_for user, url: '/profile', method: :get, class: 'hexlet-form', &:submit
 
     expected = read_fixture('form2')
     assert { actual == expected }
