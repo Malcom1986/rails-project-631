@@ -3,15 +3,20 @@
 module HexletCode
   class Form
     def initialize(entity, opts = {})
+      @default_opts = { method: 'post' }
       @fields = []
       @entity = entity
       @opts = opts
     end
 
     def to_html
+      options = @default_opts.merge(@opts.except(:url))
+
       action = @opts[:url] || '#'
+      params = { action: }
       content = @fields.map(& :to_html).join
-      Tag.build('form', action:, method: 'post') { content }
+
+      Tag.build('form', params.merge(options)) { content }
     end
 
     def input(field, opts = {})
