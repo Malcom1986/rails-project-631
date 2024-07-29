@@ -46,4 +46,22 @@ class PostTest < Minitest::Test
     expected = read_fixture('form_with_fields_attr')
     assert { actual == expected }
   end
+
+  def test_form_builder_with_redifine_defaults
+    actual = HexletCode.form_for @user, url: '#' do |f|
+      f.input :job, as: :text, rows: 50, cols: 50
+    end
+    expected = read_fixture('form_with_redifine_defaults')
+    assert { actual == expected }
+  end
+
+  def test_form_builder_with_full_form
+    actual = HexletCode.form_for @user, url: '#' do |f|
+      f.input :name
+      f.input :job
+      f.submit 'Wow'
+    end
+    expected = read_fixture('full_form')
+    assert { actual == expected }
+  end
 end
