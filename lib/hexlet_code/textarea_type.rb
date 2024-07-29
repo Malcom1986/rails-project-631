@@ -13,7 +13,9 @@ module HexletCode
     def to_html
       options = @default_opts.merge(@opts)
       params = { name: prop }
-      Tag.build('textarea', params.merge(options)) { value }
+      label = Tag.build('label', for: prop) { prop.capitalize }
+      input = Tag.build('textarea', params.merge(options)) { value }
+      "#{label}#{input}"
     end
   end
 end
