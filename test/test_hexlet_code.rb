@@ -23,8 +23,7 @@ class PostTest < Minitest::Test
   # end
 
   # def test_form_builder_with_empty_fields_w_url
-  #   actual = HexletCode.form_for @user, url: '/users' do |f|
-  #   end
+  #   actual = HexletCode.form_for @user, url: '/users'
   #   expected = read_fixture('empty_form_w_url')
   #   assert { actual == expected }
   # end
@@ -65,7 +64,7 @@ class PostTest < Minitest::Test
     assert { actual == expected }
   end
 
-  def test_form_builder2
+  def test_form_builder_with_label
     user = User.new job: 'hexlet'
 
     actual = HexletCode.form_for user, url: '#' do |f|
@@ -74,16 +73,16 @@ class PostTest < Minitest::Test
       f.submit 'Wow'
     end
 
-    expected = read_fixture('form1')
+    expected = read_fixture('form_with_label')
     assert { actual == expected }
   end
 
-  def test_form_builder3
+  def test_form_builder_with_redifine
     user = User.new name: 'rob'
 
     actual = HexletCode.form_for user, url: '/profile', method: :get, class: 'hexlet-form', &:submit
 
-    expected = read_fixture('form2')
+    expected = read_fixture('form_with_redifine_method')
     assert { actual == expected }
   end
 end

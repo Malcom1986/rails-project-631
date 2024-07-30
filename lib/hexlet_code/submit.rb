@@ -3,12 +3,16 @@
 module HexletCode
   class Submit
     def initialize(value)
-      @value = value
+      @tag = 'input'
+      @type = 'submit'
+      @content = nil
+      @options = get_options(value)
     end
-    attr_reader(:value)
+    attr_reader(:tag, :type, :options, :content)
 
-    def to_html
-      Tag.build('input', type: 'submit', value:)
+    def get_options(value)
+      value ||= 'Save'
+      { type:, value: }
     end
   end
 end
