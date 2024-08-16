@@ -1,4 +1,5 @@
 # Генератор форм
+
 [![hexlet-check](https://github.com/Malcom1986/rails-project-63/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Malcom1986/rails-project-63/actions/workflows/hexlet-check.yml)
 [![Ruby](https://github.com/Malcom1986/rails-project-63/actions/workflows/main.yml/badge.svg)](https://github.com/Malcom1986/rails-project-63/actions/workflows/main.yml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/47872a94b69bb0b2063e/maintainability)](https://codeclimate.com/github/Malcom1986/rails-project-63/maintainability)
